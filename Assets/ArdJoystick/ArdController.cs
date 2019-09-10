@@ -22,7 +22,7 @@ namespace ArdJoystick
             {
                 serialPort = new SerialPort(port, baudRate)
                 {
-                    ReadTimeout = 10
+                    ReadTimeout = 100
                 };
                 serialPort.Open();
             }
@@ -74,10 +74,10 @@ namespace ArdJoystick
 
                 try
                 {
-                    //string result = serialPort.ReadLine();
+                    string result = serialPort.ReadLine();
 
                     // Tests
-                    string result = SimulateReadLine();
+                    //string result = SimulateReadLine();
 
                     string[] resultData = result.Split(';');
 
@@ -90,6 +90,9 @@ namespace ArdJoystick
 
                         button.ProcessData(data);
                     }
+
+                    string leituraSensor = resultData[resultData.Length - 1];
+                    Debug.Log("Leitura Sensor: " + leituraSensor);
                 }
                 catch (Exception e)
                 {
